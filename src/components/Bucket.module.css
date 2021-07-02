@@ -24,3 +24,20 @@
 .tool:not(:first-child) {
   margin-left: 8px;
 }
+
+.labelStyle {
+  border-radius: 5px;
+  border: none;
+  text-align: center;
+  height: 35px;
+  width: 100px;
+  /* color: white; */
+  cursor: pointer;
+  outline: none;
+  margin-left: 10px;
+}
+
+.colorPalette {
+  position: absolute;
+  z-index: 100;
+}

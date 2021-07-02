@@ -49,6 +49,22 @@
   user-select: none;
 }
 
+.labelStyle {
+  border-radius: 5px;
+  border: none;
+  text-align: center;
+  height: 35px;
+  width: 100px;
+  /* color: white; */
+  cursor: pointer;
+  outline: none;
+}
+
+.colorPalette {
+  position: absolute;
+  z-index: 100;
+}
+
 /* Custom Slider */
 .slider {
   -webkit-appearance: none;
