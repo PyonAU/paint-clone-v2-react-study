@@ -18,9 +18,14 @@ function Paint() {
   const [isBrushColorClicked, setBrushColorClicked] = useState(false);
   const [isBucketColorClicked, setBucketColorClicked] = useState(false);
   const [sliderSize, setSliderSize] = useState(10);
+  const [isIconClicked, setIconClicked] = useState({
+    brushIcon: true,
+    eraserIcon: false
+  });
 
   // Destructuring
   const { brushColor, bucketColor } = colorHexCode;
+  const { brushIcon, eraserIcon } = isIconClicked;
 
   const handleColorCode = (event) => {
     if (isBrushColorClicked) {
@@ -53,10 +58,20 @@ function Paint() {
     setSliderSize(event.target.valueAsNumber);
   };
 
+  const eraserChosen = () => {
+    setIconClicked({brushIcon: false, eraserIcon: true});
+  };
+
+  const brushChosen = () => {
+    setIconClicked({brushIcon: true, eraserIcon: false});
+  };
+
   return (
     <>
       <div className={styles.topBar}>
-        <ActiveTool />
+        <ActiveTool
+          eraserIcon={eraserIcon}
+        />
         <Brush
           handleColorCode={handleColorCode}
           brushColor={brushColor}
@@ -65,6 +80,8 @@ function Paint() {
           inputChangeForBrush={inputChangeForBrush}
           handleSliderChange={handleSliderChange}
           sliderSize={sliderSize}
+          brushIcon={brushIcon}
+          brushChosen={brushChosen}
         />
         <Bucket
           bucketColor={bucketColor}
@@ -73,7 +90,10 @@ function Paint() {
           isBucketColorClicked={isBucketColorClicked}
           inputChangeForBucket={inputChangeForBucket}
         />
-        <Eraser />
+        <Eraser 
+          eraserChosen={eraserChosen}
+          eraserIcon={eraserIcon}
+        />
         <Clear />
         <LocalStorage />
         <DownloadImage />

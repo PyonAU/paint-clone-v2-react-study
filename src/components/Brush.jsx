@@ -10,17 +10,26 @@ function Brush({
   isBrushColorClicked,
   inputChangeForBrush,
   handleSliderChange,
-  sliderSize
+  sliderSize,
+  brushIcon,
+  brushChosen
 }) {
-
   // classnames for styling
   const brushTool = cx(styles.brush, styles.tool);
 
   const brushColorHex = brushColor.toUpperCase();
 
+  const brushIconColor = brushIcon ? "black" : "white";
+
   return (
     <div className={brushTool}>
-      <i className={`${styles.fas} fas fa-brush `} id="brush" title="Brush"></i>
+      <i
+        className={`${styles.fas} fas fa-brush `}
+        style={{ color: brushIconColor }}
+        id="brush"
+        title="Brush"
+        onClick={brushChosen}
+      ></i>
       <input
         className={styles.labelStyle}
         type="text"
@@ -31,10 +40,7 @@ function Brush({
       />
       <div className={styles.colorPalette}>
         {isBrushColorClicked && (
-          <SketchPicker 
-            color={brushColor} 
-            onChange={handleColorCode}
-          />
+          <SketchPicker color={brushColor} onChange={handleColorCode} />
         )}
       </div>
       <span className={styles.size} id="brush-size" title="Brush Size">
