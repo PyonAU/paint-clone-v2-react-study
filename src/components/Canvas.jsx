@@ -75,8 +75,6 @@ function Canvas(props) {
     }
   };
 
-  console.log('drawnArray:', drawnArray);
-
   const startDrawing = (event) => {
     ctx.current.lineJoin = 'round';
     ctx.current.lineCap = 'round';
@@ -92,7 +90,7 @@ function Canvas(props) {
   };
 
   const stopDrawing = () => {
-    // ctx.current.closePath();
+    ctx.current.closePath();
     setDrawing(false);
   };
 
