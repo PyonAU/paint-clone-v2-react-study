@@ -1,11 +1,16 @@
-import React from 'react';
-import styles from './DownloadImage.module.css';
+import React from "react";
+import styles from "./DownloadImage.module.css";
 
-function DownloadImage() {
+function DownloadImage({ saveImage }) {
+
   return (
     <div className={styles.tool}>
-      <a id="download">
-        <i className={`${styles.far} far fa-save`} title="Save Image File"></i>
+      <a>
+        <i
+          className={`${styles.far} far fa-save`}
+          title="Save Image File"
+          onClick={saveImage}
+        ></i>
       </a>
     </div>
   );

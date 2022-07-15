@@ -12,7 +12,7 @@ function Brush({
   handleSliderChange,
   sliderSize,
   brushIcon,
-  brushChosen
+  brushChosen,
 }) {
   // classnames for styling
   const brushTool = cx(styles.brush, styles.tool);

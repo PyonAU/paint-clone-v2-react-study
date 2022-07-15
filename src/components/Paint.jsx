@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import ActiveTool from './ActiveTool';
 import Brush from './Brush';
 import Bucket from './Bucket';
@@ -22,6 +22,11 @@ function Paint() {
     brushIcon: true,
     eraserIcon: false
   });
+  const [isCleared, setIsCleared] = useState(false);
+  const [isSaved, setIsSaved] = useState(false);
+  const [getSavedDrawing, setGetSavedDrawing] = useState(false);
+  const [localStorageCleared, setLocalStorageCleared] = useState(false);
+  const [downloadImage, setDownloadImage] = useState(false);
 
   // Destructuring
   const { brushColor, bucketColor } = colorHexCode;
@@ -37,12 +42,12 @@ function Paint() {
   };
 
   const showBrushColorPicker = () => {
-    setBrushColorClicked((prevState) => !prevState);
+    setBrushColorClicked(!isBrushColorClicked);
     setBucketColorClicked(false);
   };
 
   const showBucketColorPicker = () => {
-    setBucketColorClicked((prevState) => !prevState);
+    setBucketColorClicked(!isBucketColorClicked);
     setBrushColorClicked(false);
   };
 
@@ -64,6 +69,26 @@ function Paint() {
 
   const brushChosen = () => {
     setIconClicked({brushIcon: true, eraserIcon: false});
+  };
+
+  const clearDrawing = () => {
+    setIsCleared(true);
+  }
+
+  const saveToStorage = () => {
+    setIsSaved(true);
+  }
+
+  const getFromStorage = () => {
+    setGetSavedDrawing(true);
+  }
+
+  const clearLocalStorage = () => {
+    setLocalStorageCleared(true);
+  }
+
+  const saveImage = () => {
+    setDownloadImage(true);
   };
 
   return (
@@ -94,9 +119,17 @@ function Paint() {
           eraserChosen={eraserChosen}
           eraserIcon={eraserIcon}
         />
-        <Clear />
-        <LocalStorage />
-        <DownloadImage />
+        <Clear 
+          clearDrawing={clearDrawing}
+        />
+        <LocalStorage 
+          saveToStorage={saveToStorage}
+          getFromStorage={getFromStorage}
+          clearLocalStorage={clearLocalStorage}
+        />
+        <DownloadImage 
+          saveImage={saveImage}
+        />
       </div>
       {brushColor && (
         <Canvas
@@ -104,6 +137,18 @@ function Paint() {
           bucketColor={bucketColor}
           sliderSize={sliderSize}
           isBrushColorClicked={isBrushColorClicked}
+          brushIcon={brushIcon}
+          eraserIcon={eraserIcon}
+          isCleared={isCleared}
+          setIsCleared={setIsCleared}
+          isSaved={isSaved}
+          setIsSaved={setIsSaved}
+          getSavedDrawing={getSavedDrawing}
+          setGetSavedDrawing={setGetSavedDrawing}
+          localStorageCleared={localStorageCleared}
+          setLocalStorageCleared={setLocalStorageCleared}
+          downloadImage={downloadImage}
+          setDownloadImage={setDownloadImage}
         />
       )}
     </>
