@@ -20,7 +20,7 @@ function Canvas(props) {
       ctx.current.lineWidth = drawnArray[i].size;
       ctx.current.lineCap = "round";
 
-      if (drawnArray[i].eraser) {
+      if (drawnArray[i].erase) {
         ctx.current.strokeStyle = props.bucketColor;
         ctx.current.lineWidth = "50";
       } else {
